@@ -2,6 +2,7 @@
     "verbose": false,
     "watch": [
       "app/utils",
+      "app/pages/*.*",
       "app/routes.jsx",
       "server",
       "webpack"

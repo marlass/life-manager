@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { db } from './constants';
-import loadModels from './models';
 
 export default () => {
   // Find the appropriate database to connect to, default to localhost if not found.
@@ -19,5 +18,4 @@ export default () => {
   mongoose.connection.on('error', console.log);
   mongoose.connection.on('disconnected', connect);
 
-  loadModels();
 };

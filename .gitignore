@@ -38,6 +38,7 @@ jspm_packages
 
 # Do not commit files from example app
 example-app
+example-server
 
 # Editor settings
 .vscode
