@@ -35,3 +35,12 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Do not commit files from example app
+example-app
+
+# Editor settings
+.vscode
+
+# Compiled files
+compiled
