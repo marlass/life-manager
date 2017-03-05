@@ -64,9 +64,9 @@ export default function render(req, res) {
           const html = pageRenderer(store, props);
           res.status(200).send(html);
         })
-        .catch(err => {
-          console.error(err);
-          res.status(500).json(err);
+        .catch(err2 => {
+          console.error(err2);
+          res.status(500).json(err2);
         });
     } else {
       res.sendStatus(404);

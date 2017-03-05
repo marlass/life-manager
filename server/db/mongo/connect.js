@@ -17,5 +17,4 @@ export default () => {
 
   mongoose.connection.on('error', console.log);
   mongoose.connection.on('disconnected', connect);
-
 };
