@@ -7,6 +7,8 @@ const todoReducer = (
   switch (action.type) {
     case types.ADD_TODO:
       return [action.payload, ...state];
+    case types.REMOVE_TODO:
+      return state.filter(element => element.name !== action.payload);
     default:
       return state;
   }

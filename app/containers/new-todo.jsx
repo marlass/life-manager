@@ -1,22 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import addTodo from './../actions/todo';
+import { addTodo } from './../actions/todo';
 
 class NewTodo extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
-            newTodo: '',
+            name: '',
+            project: ''
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.onChangeProject = this.onChangeProject.bind(this);
     }
 
     render () {
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
-                    <input type="text" name="newTodo" onChange={this.onChange} value={this.state.newTodo} />
+                    <p>
+                        <label htmlFor="name">Zadanie</label><br />
+                        <input id="name" type="text" name="name" onChange={this.onChange} value={this.state.name} />
+                    </p>
+                    <p>
+                        <label htmlFor="project">Projekt</label><br />
+                        <input id="project" type="text" name="project" onChange={this.onChangeProject} value={this.state.project} />
+                    </p>
                     <button type="submit">Dodaj</button>
                 </form>
             </div>
@@ -25,16 +34,19 @@ class NewTodo extends React.Component {
 
     onSubmit (event) {
         event.preventDefault();
-        this.props.newTodo(this.state.newTodo);
+        this.props.newTodo(this.state);
         this.setState({
-            newTodo: ''
+            name: '',
+            project: ''
         })
     }
 
     onChange (event) {
-        this.setState({
-            newTodo: event.target.value,
-        })
+        this.setState({ name: event.target.value })
+    }
+
+    onChangeProject (event) {
+        this.setState({ project: event.target.value })
     }
 }
 

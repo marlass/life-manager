@@ -3,3 +3,4 @@ export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 export const REQUEST_FAILURE = 'REQUEST_FAILURE';
 
 export const ADD_TODO = 'ADD_TODO';
+export const REMOVE_TODO = 'REMOVO_TODO';

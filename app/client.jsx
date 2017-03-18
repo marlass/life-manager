@@ -11,8 +11,8 @@ import fetchDataForRoute from './utils/fetchDataForRoute';
 // Grab the state from a global injected into
 // server-generated HTML
 const initialState = window.__INITIAL_STATE__;
-
-const store = configureStore(initialState, browserHistory);
+const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
+const store = configureStore(persistedState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store);
 
