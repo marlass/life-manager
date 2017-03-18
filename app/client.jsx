@@ -7,12 +7,18 @@ import createRoutes from './routes';
 import * as types from './types';
 import configureStore from './store/configureStore';
 import fetchDataForRoute from './utils/fetchDataForRoute';
+import { isClient } from './../config/app';
 
 // Grab the state from a global injected into
 // server-generated HTML
 const initialState = window.__INITIAL_STATE__;
-const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
-const store = configureStore(persistedState, browserHistory);
+let store;
+if (isClient) {
+  const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
+  store = configureStore(persistedState, browserHistory);
+} else {
+  store = configureStore(initialState, browserHistory); 
+}
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store);
 

@@ -26,9 +26,11 @@ export default function configureStore(initialState, history) {
     store = createStore(rootReducer, initialState, compose(applyMiddleware(...middleware), f => f));
   }
 
-  store.subscribe(()=>{
-    localStorage.setItem('reduxState', JSON.stringify(store.getState()))
-  })
+  if (isClient) {
+    store.subscribe(()=>{
+      localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+    })
+  }
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
