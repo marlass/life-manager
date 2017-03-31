@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TodoItem from './../components/todo-item.jsx';
-import { removeTodo } from './../actions/todo';
+import { removeTask } from './../actions/task';
 
 class TodoList extends React.Component {
     constructor (props) {
@@ -12,27 +12,27 @@ class TodoList extends React.Component {
     render () {
         return (
             <ul>
-                {this.props.todos.map(todo => <TodoItem key={todo.name} onDelete={this.onDelete} project={todo.project}>{todo.name}</TodoItem>)}
+                {this.props.tasks.map(task => <TodoItem key={task.name} onDelete={this.onDelete} project={task.project}>{task.name}</TodoItem>)}
             </ul>
         );
     }
 
     onDelete (task, event) {
-        this.props.removeTodo(task);
+        this.props.removeTask(task);
         event.preventDefault();
     }
 }
 
-const mapStateToProps = ({ todos }) => {
+const mapStateToProps = ({ tasks }) => {
     return {
-        todos
+        tasks
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeTodo(todo){
-        dispatch(removeTodo(todo))
+    removeTask(task){
+        dispatch(removeTask(task))
     }
   }
 }

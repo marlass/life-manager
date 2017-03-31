@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from './../actions/todo';
+import { addTask } from './../actions/task';
 
 class NewTodo extends React.Component {
     constructor (props) {
@@ -34,7 +34,7 @@ class NewTodo extends React.Component {
 
     onSubmit (event) {
         event.preventDefault();
-        this.props.newTodo(this.state);
+        this.props.newTask(this.state);
         this.setState({
             name: '',
             project: ''
@@ -52,8 +52,8 @@ class NewTodo extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    newTodo(todo){
-        dispatch(addTodo(todo))
+    newTask(task){
+        dispatch(addTask(task))
     }
   }
 }

@@ -1,17 +1,17 @@
-import * as types from '../types';
+import { ADD_TASK, REMOVE_TASK } from '../types';
 
-const todoReducer = (
+const taskReducer = (
   state = [],
   action
 ) => {
   switch (action.type) {
-    case types.ADD_TODO:
+    case ADD_TASK:
       return [action.payload, ...state];
-    case types.REMOVE_TODO:
+    case REMOVE_TASK:
       return state.filter(element => element.name !== action.payload);
     default:
       return state;
   }
 };
 
-export default todoReducer;
+export default taskReducer;

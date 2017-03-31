@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
 import user from './user';
-import todos from './todo';
+import tasks from './task';
+import projects from './projects';
 
 
 // Combine reducers with routeReducer which keeps track of
@@ -9,7 +10,8 @@ import todos from './todo';
 const rootReducer = combineReducers({
   user,
   routing,
-  todos
+  tasks,
+  projects
 });
 
 export default rootReducer;
