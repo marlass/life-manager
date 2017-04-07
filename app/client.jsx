@@ -8,13 +8,14 @@ import * as types from './types';
 import configureStore from './store/configureStore';
 import fetchDataForRoute from './utils/fetchDataForRoute';
 import { isClient } from './../config/app';
+import transit from 'transit-immutable-js';
 
 // Grab the state from a global injected into
 // server-generated HTML
 const initialState = window.__INITIAL_STATE__;
 let store;
 if (isClient) {
-  const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
+  const persistedState = localStorage.getItem('reduxState') ? transit.fromJSON(localStorage.getItem('reduxState')) : {}
   store = configureStore(persistedState, browserHistory);
 } else {
   store = configureStore(initialState, browserHistory); 

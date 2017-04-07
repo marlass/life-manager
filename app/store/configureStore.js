@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers';
 import { isClient, isDebug } from '../../config/app';
+import transit from 'transit-immutable-js';
 
 /*
  * @param {Object} initial state to bootstrap our stores with for server-side rendering
@@ -28,7 +29,7 @@ export default function configureStore(initialState, history) {
 
   if (isClient) {
     store.subscribe(()=>{
-      localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+      localStorage.setItem('reduxState', transit.toJSON(store.getState()))
     })
   }
 

@@ -4,31 +4,32 @@ import { ADD_PROJECT, REMOVE_PROJECT, SET_PROJECT_NAME,
     SET_PROJECT_CATEGORY_NAME, SET_PROJECT_CATEGORY_DESCRIPTION,
     EDIT_PROJECT_ID, EDIT_PROJECT_CATEGORY_ID
 } from '../types';
+import Immutable from 'immutable';
 
 const projectsReducer = (
-  state = {},
+  state = Immutable.Map({}),
   action
 ) => {
   switch (action.type) {
     case ADD_PROJECT:
-      return Object.assign({},state,{[action.payload]: {
+      return state.set(action.payload, Immutable.Map({
         id: action.payload,
         name: '',
         description: '',
-        categories: {}
-      }});
+        categories: Immutable.Map({})
+      }))
     case REMOVE_PROJECT:
-      return _.omit(state, [action.payload]);
+      return state.delete(action.payload);
     case SET_PROJECT_NAME:
-      return Object.assign({},
-        _.set(state,
-          `[${action.payload.projectId}].name`,
-          action.payload.name))
+      return state.set(action.payload.projectId,
+        state
+          .get(action.payload.projectId)
+          .set('name',action.payload.name));
     case SET_PROJECT_DESCRIPTION:
-      return Object.assign({},
-        _.set(state,
-          `[${action.payload.projectId}].description`,
-          action.payload.description))
+      return state.set(action.payload.projectId,
+        state
+          .get(action.payload.projectId)
+          .set('description',action.payload.description));
     case ADD_PROJECT_CATEGORY:
     case REMOVE_PROJECT_CATEGORY:
     case SET_PROJECT_CATEGORY_NAME:
