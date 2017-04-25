@@ -1,6 +1,10 @@
 import React from 'react';
+import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import { addTask } from './../actions/task';
+import styles from './new-todo.css';
+
+const cx = classNames.bind(styles);
 
 class NewTodo extends React.Component {
     constructor (props) {
@@ -19,14 +23,14 @@ class NewTodo extends React.Component {
             <div>
                 <form onSubmit={this.onSubmit}>
                     <p>
-                        <label htmlFor="name">Zadanie</label><br />
-                        <input id="name" type="text" name="name" onChange={this.onChange} value={this.state.name} />
+                        <label className={cx('label')} htmlFor="name">Zadanie</label><br />
+                        <input className={cx('input')}  id="name" type="text" name="name" onChange={this.onChange} value={this.state.name} />
                     </p>
                     <p>
-                        <label htmlFor="project">Projekt</label><br />
-                        <input id="project" type="text" name="project" onChange={this.onChangeProject} value={this.state.project} />
+                        <label className={cx('label')}  htmlFor="project">Projekt</label><br />
+                        <input className={cx('input')}  id="project" type="text" name="project" onChange={this.onChangeProject} value={this.state.project} />
                     </p>
-                    <button type="submit">Dodaj</button>
+                    <button  className={cx('button')} type="submit">Dodaj</button>
                 </form>
             </div>
         );

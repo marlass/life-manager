@@ -1,0 +1,29 @@
+.label {
+    font-family: sans-serif;
+    margin-bottom: 4px;
+    display: inline-block;
+}
+
+.input {
+    height: 32px;
+    line-height: 28px;
+    padding: 0 8px;
+    border: 1px solid #333;
+    font-family: sans-serif;
+}
+
+.button {
+    height: 32px;
+    line-height: 28px;
+    padding: 0 20px;
+    font-size: 1.2em;
+    border: 2px solid #333;
+    font-family: sans-serif;
+    background-color: white;
+    transition: border-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.button:hover {
+    border-color: royalblue;
+}
