@@ -1,0 +1,45 @@
+@custom-media --mobile (max-width: 15em);
+
+:root {
+    --gray: #333;
+    --blue: royalblue;
+    --lightgray: #777;
+}
+
+.task {
+    font-size: 1.5rem;
+    font-family: sans-serif;
+}
+
+.project {
+    color: var(--lightgray);
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    padding-left: 0.9em;
+
+    @media (--mobile) {
+        display: block;
+        padding-left: 0;
+        padding-top: 5px;
+        width: 90%;
+    }
+}
+
+.remove {
+    font-family: sans-serif;
+    background-color: transparent;
+    border: 2px solid var(--gray);
+    color: var(--gray);
+    cursor: pointer;
+    transition: border-color 0.2s ease-in-out;
+    font-weight: 700;
+
+    &:hover {
+        border-color: var(--blue);
+    }
+
+    @media (--mobile) {
+        display: block;
+        margin-top: 15px;
+    }
+}
