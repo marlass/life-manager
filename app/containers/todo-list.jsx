@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import TodoItem from "./../components/todo-item.jsx";
-import { removeTask } from "./../actions/task";
+import { removeTask } from "./../reducers/task";
 
 class TodoList extends React.Component {
   constructor(props) {

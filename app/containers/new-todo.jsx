@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames/bind";
 import { connect } from "react-redux";
-import { addTask } from "./../actions/task";
+import { addTask } from "./../reducers/task";
 import styles from "./new-todo.css";
 
 const cx = classNames.bind(styles);

@@ -1,4 +1,5 @@
-import { ADD_TASK, REMOVE_TASK } from "../types";
+const ADD_TASK = "ADD_TASK";
+const REMOVE_TASK = "REMOVO_TASK";
 
 const taskReducer = (state = [], action) => {
   switch (action.type) {
@@ -12,3 +13,17 @@ const taskReducer = (state = [], action) => {
 };
 
 export default taskReducer;
+
+export function addTask(task) {
+  return {
+    type: ADD_TASK,
+    payload: task,
+  };
+}
+
+export function removeTask(task) {
+  return {
+    type: REMOVE_TASK,
+    payload: task,
+  };
+}
