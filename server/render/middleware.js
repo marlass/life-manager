@@ -1,11 +1,11 @@
-import axios from 'axios';
-import { createMemoryHistory, match } from 'react-router';
-import createRoutes from '../../app/routes';
-import configureStore from '../../app/store/configureStore';
-import * as types from '../../app/types';
-import { baseURL } from '../../config/app';
-import pageRenderer from './pageRenderer';
-import fetchDataForRoute from '../../app/utils/fetchDataForRoute';
+import axios from "axios";
+import { createMemoryHistory, match } from "react-router";
+import createRoutes from "../../app/routes";
+import configureStore from "../../app/store/configureStore";
+import * as types from "../../app/types";
+import { baseURL } from "../../config/app";
+import pageRenderer from "./pageRenderer";
+import fetchDataForRoute from "../../app/utils/fetchDataForRoute";
 
 // configure baseURL for axios requests (for serverside API calls)
 axios.defaults.baseURL = baseURL;
@@ -18,14 +18,17 @@ axios.defaults.baseURL = baseURL;
 export default function render(req, res) {
   const authenticated = req.isAuthenticated();
   const history = createMemoryHistory();
-  const store = configureStore({
-    user: {
-      authenticated,
-      isWaiting: false,
-      message: '',
-      isLogin: true
-    }
-  }, history);
+  const store = configureStore(
+    {
+      user: {
+        authenticated,
+        isWaiting: false,
+        message: "",
+        isLogin: true,
+      },
+    },
+    history,
+  );
   const routes = createRoutes(store);
 
   /*
@@ -49,7 +52,7 @@ export default function render(req, res) {
    * If all three parameters are `undefined`, this means that there was no route found matching the
    * given location.
    */
-  match({routes, location: req.url}, (err, redirect, props) => {
+  match({ routes, location: req.url }, (err, redirect, props) => {
     if (err) {
       res.status(500).json(err);
     } else if (redirect) {

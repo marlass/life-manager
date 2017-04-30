@@ -1,21 +1,21 @@
-import express from 'express';
-import passport from 'passport';
-import session from 'express-session';
-import bodyParser from 'body-parser';
-import path from 'path';
-import flash from 'express-flash';
-import methodOverride from 'method-override';
-import gzip from 'compression';
-import helmet from 'helmet';
-import unsupportedMessage from '../db/unsupportedMessage';
-import { sessionSecret } from '../../config/secrets';
-import { DB_TYPE, ENV } from '../../config/env';
-import { session as dbSession } from '../db';
+import express from "express";
+import passport from "passport";
+import session from "express-session";
+import bodyParser from "body-parser";
+import path from "path";
+import flash from "express-flash";
+import methodOverride from "method-override";
+import gzip from "compression";
+import helmet from "helmet";
+import unsupportedMessage from "../db/unsupportedMessage";
+import { sessionSecret } from "../../config/secrets";
+import { DB_TYPE, ENV } from "../../config/env";
+import { session as dbSession } from "../db";
 
-export default (app) => {
-  app.set('port', (process.env.PORT || 3000));
+export default app => {
+  app.set("port", process.env.PORT || 3000);
 
-  if (ENV === 'production') {
+  if (ENV === "production") {
     app.use(gzip());
     // Secure your Express apps by setting various HTTP headers. Documentation: https://github.com/helmetjs/helmet
     app.use(helmet());
@@ -25,7 +25,7 @@ export default (app) => {
   app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
   app.use(methodOverride());
 
-  app.use(express.static(path.join(process.cwd(), 'public')));
+  app.use(express.static(path.join(process.cwd(), "public")));
 
   // I am adding this here so that the Heroku deploy will work
   // Indicates the app is behind a front-facing proxy,
@@ -37,7 +37,7 @@ export default (app) => {
   // To enable it, use the values described in the trust proxy options table.
   // The trust proxy setting is implemented using the proxy-addr package. For more information, see its documentation.
   // loopback - 127.0.0.1/8, ::1/128
-  app.set('trust proxy', 'loopback');
+  app.set("trust proxy", "loopback");
   // Create a session middleware with the given options
   // Note session data is not saved in the cookie itself, just the session ID. Session data is stored server-side.
   // Options: resave: forces the session to be saved back to the session store, even if the session was never
@@ -56,7 +56,7 @@ export default (app) => {
   //                  If secure is set, and you access your site over HTTP, the cookie will not be set.
   let sessionStore = null;
   if (!dbSession) {
-    console.warn(unsupportedMessage('session'));
+    console.warn(unsupportedMessage("session"));
   } else {
     sessionStore = dbSession();
   }
@@ -66,28 +66,29 @@ export default (app) => {
     saveUninitialized: false,
     secret: sessionSecret,
     proxy: true, // The "X-Forwarded-Proto" header will be used.
-    name: 'sessionId',
+    name: "sessionId",
     // Add HTTPOnly, Secure attributes on Session Cookie
     // If secure is set, and you access your site over HTTP, the cookie will not be set
     cookie: {
       httpOnly: true,
       secure: false,
     },
-    store: sessionStore
+    store: sessionStore,
   };
 
-  console.log('--------------------------');
-  console.log('===> 😊  Starting Server . . .');
+  console.log("--------------------------");
+  console.log("===> 😊  Starting Server . . .");
   console.log(`===>  Environment: ${ENV}`);
-  console.log(`===>  Listening on port: ${app.get('port')}`);
+  console.log(`===>  Listening on port: ${app.get("port")}`);
   console.log(`===>  Using DB TYPE: ${DB_TYPE}`);
-  if (ENV === 'production') {
-    console.log('===> 🚦  Note: In order for authentication to work in production');
-    console.log('===>           you will need a secure HTTPS connection');
+  if (ENV === "production") {
+    console.log(
+      "===> 🚦  Note: In order for authentication to work in production",
+    );
+    console.log("===>           you will need a secure HTTPS connection");
     sess.cookie.secure = true; // Serve secure cookies
   }
-  console.log('--------------------------');
-
+  console.log("--------------------------");
 
   app.use(session(sess));
 

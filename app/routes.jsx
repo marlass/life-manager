@@ -1,6 +1,6 @@
-import React from 'react';
-import { Route } from 'react-router';
-import { App } from './pages';
+import React from "react";
+import { Route } from "react-router";
+import { App } from "./pages";
 
 /*
  * @param {Redux Store}
@@ -8,7 +8,5 @@ import { App } from './pages';
  * state from the store after it has been authenticated.
  */
 export default () => {
-  return (
-    <Route path="/" component={App} />
-  );
+  return <Route path="/" component={App} />;
 };

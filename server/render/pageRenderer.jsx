@@ -1,15 +1,16 @@
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { Provider } from 'react-redux';
-import { RouterContext } from 'react-router';
-import Helmet from 'react-helmet';
-import { createAppScript, createTrackingScript } from './createScripts';
+import React from "react";
+import { renderToString } from "react-dom/server";
+import { Provider } from "react-redux";
+import { RouterContext } from "react-router";
+import Helmet from "react-helmet";
+import { createAppScript, createTrackingScript } from "./createScripts";
 
-const createApp = (store, props) => renderToString(
-  <Provider store={store}>
-    <RouterContext {...props} />
-  </Provider>
-);
+const createApp = (store, props) =>
+  renderToString(
+    <Provider store={store}>
+      <RouterContext {...props} />
+    </Provider>,
+  );
 
 const buildPage = ({ componentHTML, initialState, headAssets }) => {
   return `
@@ -35,4 +36,3 @@ export default (store, props) => {
   const headAssets = Helmet.rewind();
   return buildPage({ componentHTML, initialState, headAssets });
 };
-

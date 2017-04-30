@@ -1,24 +1,26 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import createRoutes from './routes';
-import * as types from './types';
-import configureStore from './store/configureStore';
-import fetchDataForRoute from './utils/fetchDataForRoute';
-import { isClient } from './../config/app';
-import transit from 'transit-immutable-js';
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { Router, browserHistory } from "react-router";
+import { syncHistoryWithStore } from "react-router-redux";
+import createRoutes from "./routes";
+import * as types from "./types";
+import configureStore from "./store/configureStore";
+import fetchDataForRoute from "./utils/fetchDataForRoute";
+import { isClient } from "./../config/app";
+import transit from "transit-immutable-js";
 
 // Grab the state from a global injected into
 // server-generated HTML
 const initialState = window.__INITIAL_STATE__;
 let store;
 if (isClient) {
-  const persistedState = localStorage.getItem('reduxState') ? transit.fromJSON(localStorage.getItem('reduxState')) : {}
+  const persistedState = localStorage.getItem("reduxState")
+    ? transit.fromJSON(localStorage.getItem("reduxState"))
+    : {};
   store = configureStore(persistedState, browserHistory);
 } else {
-  store = configureStore(initialState, browserHistory); 
+  store = configureStore(initialState, browserHistory);
 }
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store);
@@ -39,12 +41,10 @@ function onUpdate() {
   }
 
   store.dispatch({ type: types.CREATE_REQUEST });
-  fetchDataForRoute(this.state)
-    .then(data => {
-      return store.dispatch({ type: types.REQUEST_SUCCESS, data });
-    });
+  fetchDataForRoute(this.state).then(data => {
+    return store.dispatch({ type: types.REQUEST_SUCCESS, data });
+  });
 }
-
 
 // Router converts <Route> element hierarchy to a route config:
 // Read more https://github.com/rackt/react-router/blob/latest/docs/Glossary.md#routeconfig
@@ -53,4 +53,6 @@ render(
     <Router history={history} onUpdate={onUpdate}>
       {routes}
     </Router>
-  </Provider>, document.getElementById('app'));
+  </Provider>,
+  document.getElementById("app"),
+);

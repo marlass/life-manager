@@ -1,8 +1,8 @@
-import React from 'react';
-import Page from '../pages/Page';
-import { title, meta, link } from './assets';
-import NewTodo from './../containers/new-todo.jsx';
-import TodoList from './../containers/todo-list.jsx';
+import React from "react";
+import Page from "../pages/Page";
+import { title, meta, link } from "./assets";
+import NewTodo from "./../containers/new-todo.jsx";
+import TodoList from "./../containers/todo-list.jsx";
 
 const App = () => (
   <Page title={title} meta={meta} link={link}>
@@ -15,4 +15,3 @@ const App = () => (
 );
 
 export default App;
-
