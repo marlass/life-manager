@@ -21,7 +21,7 @@ const projectsReducer = (state = Immutable.Map({}), action) => {
           id: action.payload,
           name: "",
           description: "",
-          categories: Immutable.Map({}),
+          categories: {},
         }),
       );
     case REMOVE_PROJECT:

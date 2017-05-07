@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { Router, browserHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 import createRoutes from "./routes";
-import * as types from "./types";
 import configureStore from "./store/configureStore";
 import fetchDataForRoute from "./utils/fetchDataForRoute";
 import { isClient } from "./../config/app";
@@ -39,11 +38,6 @@ function onUpdate() {
     window.__INITIAL_STATE__ = null;
     return;
   }
-
-  store.dispatch({ type: types.CREATE_REQUEST });
-  fetchDataForRoute(this.state).then(data => {
-    return store.dispatch({ type: types.REQUEST_SUCCESS, data });
-  });
 }
 
 // Router converts <Route> element hierarchy to a route config:
